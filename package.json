@@ -2,9 +2,9 @@
   "name": "my-app",
   "version": "1.0.0",
   "description": "My Fly.io App",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.17.1"
