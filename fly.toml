@@ -1,15 +1,14 @@
-# fly.toml app configuration file generated for my-app-04jkog on 2025-01-16T19:49:00Z
+# fly.toml app configuration file generated for my-app-chew3g on 2025-01-16T20:13:24Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'my-app-04jkog'
-primary_region = 'cdg'
+app = 'my-app-chew3g'
+primary_region = 'gru'
 
 [build]
 
 [http_service]
-  replicas = 1
   internal_port = 3000
   force_https = true
   auto_stop_machines = 'stop'
