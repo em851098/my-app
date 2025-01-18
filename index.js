@@ -1,3 +1,5 @@
+const os = require('os');
+
 // Configuration
 const config = {
   loginURL: 'https://dppj1ypy65ita.cloudfront.net/v1/user/login',
@@ -20,9 +22,28 @@ const requestLog = {
 // Utility Functions
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+const getLocalIP = () => {
+  const networkInterfaces = os.networkInterfaces();
+  for (let interfaceName in networkInterfaces) {
+    for (let networkInterface of networkInterfaces[interfaceName]) {
+      if (networkInterface.family === 'IPv4' && !networkInterface.internal) {
+        return networkInterface.address;
+      }
+    }
+  }
+  return 'IP not found';  // If no external IP found
+};
+
+// Log Request with IP Address
 const logRequest = (type, details = {}) => {
   const timestamp = new Date();
-  const logEntry = { timestamp: timestamp.toISOString(), type, ...details };
+  const localIP = getLocalIP();  // Get the local IP address
+  const logEntry = { 
+    timestamp: timestamp.toISOString(),
+    type, 
+    localIP,  // Add local IP to log
+    ...details 
+  };
 
   if (type === 'successful') {
     requestLog.successful.push(logEntry);
@@ -30,7 +51,7 @@ const logRequest = (type, details = {}) => {
     requestLog.failed.push(logEntry);
   }
 
-  console.log(`[${timestamp.toISOString()}] ${type.toUpperCase()}:`, details);
+  console.log(`[${timestamp.toISOString()}] ${type.toUpperCase()}:`, logEntry);
 };
 
 // Random slapCount generator
