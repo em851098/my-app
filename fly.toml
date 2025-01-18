@@ -4,7 +4,7 @@
 #
 
 app = 'my-app-chew3g'
-primary_region = 'gru'
+primary_region = 'atl'
 
 [build]
 
